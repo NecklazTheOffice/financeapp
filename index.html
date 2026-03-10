@@ -10,7 +10,7 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <strong id="brand1">Financiar</strong><span class="muted" id="brand2">Aplicativo</span>
+      <strong>Financiar</strong><span class="muted">Aplicativo</span>
     </div>
 
     <div class="right">
@@ -40,43 +40,60 @@
   <nav class="tabs hidden" id="tabs">
     <button class="tab is-active" data-page="dashboard">Dashboard</button>
     <button class="tab" data-page="tx">Lançamentos</button>
-    <button class="tab" data-page="cards">Cartões</button>
-    <button class="tab" data-page="goals">Metas</button>
     <button class="tab" data-page="notes">Notas</button>
   </nav>
 
   <!-- AUTH -->
   <main class="container" id="authView">
+
+    <div class="authHero">
+      <div class="authHero__byline">Criado exclusivamente por Necklaz</div>
+      <img src="./assets/img/me.png" alt="Foto" class="authHero__img">
+    </div>
+
     <section class="panel">
       <div class="panelHeader">
-        <h2 id="authTitle">Entrar / Criar conta</h2>
-        <p class="muted" id="authSubtitle">Login com e-mail e senha (Supabase Auth).</p>
+        <h2>Entrar / Criar conta</h2>
+        <p class="muted">Login com e-mail e senha (Supabase Auth).</p>
       </div>
 
       <form class="form" id="authForm">
-        <label class="full"><span id="lblEmail">Email</span>
+        <label class="full">Email
           <input id="email" type="email" required placeholder="voce@email.com">
         </label>
 
-        <label class="full"><span id="lblPassword">Senha</span>
+        <label class="full">Senha
           <input id="password" type="password" required placeholder="mín. 6 caracteres">
         </label>
+
+        <div class="full authOpts">
+          <label class="chk"><input id="rememberEmail" type="checkbox"> Lembrar email</label>
+          <label class="chk"><input id="keepSignedIn" type="checkbox" checked> Manter conectado</label>
+        </div>
 
         <div class="actions full">
           <button class="btn primary" id="loginBtn" type="submit">Entrar</button>
           <button class="btn ghost" id="signupBtn" type="button">Criar conta</button>
           <button class="btn ghost" id="guestBtn" type="button">Entrar como convidado</button>
+          <button class="btn ghost" id="forgotBtn" type="button">Esqueci minha senha</button>
         </div>
 
         <p class="muted full" id="authMsg"></p>
       </form>
     </section>
+
+    <footer class="authFooter">
+      <a href="https://instagram.com/theeus.gouveia" target="_blank" rel="noreferrer">Instagram Público: @theeus.gouveia</a>
+      <a href="https://instagram.com/necklas01" target="_blank" rel="noreferrer">Instagram Pessoal: @necklas01</a>
+      <a href="mailto:necklas.contact@gmail.com">Email: necklas.contact@gmail.com</a>
+      <a href="https://github.com/NecklazTheOffice" target="_blank" rel="noreferrer">GitHub: NecklazTheOffice</a>
+      <a href="https://necklaztheoffice.github.io/portfolio/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnWTGcNjeONKfgYMCnkuFm2wU2D1bEvRTSsjoFc36oh9VF3lzi20fB11taOW8_aem_sB_qqtM2HPwDFKDqNDIHkw"
+         target="_blank" rel="noreferrer">Portfólio</a>
+    </footer>
   </main>
 
   <!-- APP -->
   <main class="container hidden" id="appView">
-
-    <!-- DASHBOARD PAGE -->
     <div class="page" data-page="dashboard">
       <section class="summary">
         <article class="card">
@@ -92,73 +109,8 @@
           <div class="value expense" id="expenseValue">—</div>
         </article>
       </section>
-
-      <section class="panel">
-        <div class="panelHeader">
-          <h2>Dashboard</h2>
-          <p class="muted">Visão rápida: pago, previsto, atrasos e próximos vencimentos.</p>
-        </div>
-
-        <div class="panelBody">
-          <div class="kpiGrid">
-            <div class="kpiCard">
-              <div class="muted">Saldo (Pago)</div>
-              <div class="kpiValue" id="kpiPaid">—</div>
-            </div>
-
-            <div class="kpiCard">
-              <div class="muted">Saldo (Previsto)</div>
-              <div class="kpiValue" id="kpiForecast">—</div>
-            </div>
-
-            <div class="kpiCard">
-              <div class="muted">Atrasos</div>
-              <div class="kpiValue" id="kpiOverdue">—</div>
-            </div>
-
-            <div class="kpiCard">
-              <div class="muted">Próximo vencimento</div>
-              <div class="kpiValue" id="kpiNextDue">—</div>
-              <div class="muted" id="kpiNextDueSub" style="margin-top:6px;"></div>
-            </div>
-          </div>
-
-          <div style="margin-top:14px;">
-            <h3 class="h3">Alertas e próximos</h3>
-            <div class="txList" id="alertsList"></div>
-            <div class="emptyState hidden" id="alertsEmpty">Sem alertas por enquanto.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="panelHeader">
-          <h2>Insights do mês</h2>
-          <p class="muted">Pago x Previsto (recorrências + parcelas).</p>
-        </div>
-
-        <div class="panelBody">
-          <div class="grid2">
-            <div class="cardInner">
-              <h3 class="h3">Receitas x Despesas</h3>
-              <canvas id="incomeExpenseChart" height="140"></canvas>
-            </div>
-
-            <div class="cardInner">
-              <h3 class="h3">Despesas por categoria (pizza)</h3>
-              <canvas id="categoryChart" height="140"></canvas>
-            </div>
-
-            <div class="cardInner full2">
-              <h3 class="h3">Fluxo diário (saldo acumulado)</h3>
-              <canvas id="dailyFlowChart" height="120"></canvas>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
 
-    <!-- TX PAGE -->
     <div class="page hidden" data-page="tx">
       <section class="panel">
         <div class="panelHeader row">
@@ -167,30 +119,9 @@
             <p class="muted" id="monthLabel">—</p>
           </div>
           <div class="monthNav">
-            <button class="iconBtn" id="prevMonth">◀</button>
+            <button class="iconBtn" id="prevMonth" type="button">◀</button>
             <button class="btn ghost" id="todayBtn" type="button">Hoje</button>
-            <button class="iconBtn" id="nextMonth">▶</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="panelHeader row">
-          <div>
-            <h2>Planilha + Importação</h2>
-            <p class="muted">Importe CSV “solto” e exporte CSV/XLSX.</p>
-          </div>
-          <div class="actions">
-            <input id="importCsvFile" type="file" accept=".csv,text/csv" class="hidden" />
-            <button class="btn ghost" id="importCsvBtn" type="button">Importar CSV</button>
-            <button class="btn ghost" id="exportCsvBtn" type="button">Exportar CSV</button>
-            <button class="btn ghost" id="exportXlsxBtn" type="button">Exportar XLSX</button>
-          </div>
-        </div>
-
-        <div class="panelBody">
-          <div class="tableWrap">
-            <table class="tbl" id="sheetTable"></table>
+            <button class="iconBtn" id="nextMonth" type="button">▶</button>
           </div>
         </div>
       </section>
@@ -232,39 +163,6 @@
       </section>
 
       <section class="panel">
-        <div class="panelHeader">
-          <h2>Categorias</h2>
-          <p class="muted">Crie/organize categorias padrão.</p>
-        </div>
-
-        <form class="form" id="catForm">
-          <label>Tipo
-            <select id="catType">
-              <option value="expense">Despesa</option>
-              <option value="income">Receita</option>
-            </select>
-          </label>
-
-          <label>Nome
-            <input id="catName" placeholder="Ex: Fast Food" required />
-          </label>
-
-          <label>Cor
-            <input id="catColor" type="color" value="#7c5cff" />
-          </label>
-
-          <div class="actions full">
-            <button class="btn primary" type="submit">Adicionar categoria</button>
-          </div>
-        </form>
-
-        <div class="panelBody">
-          <div class="txList" id="catList"></div>
-          <div class="emptyState hidden" id="catEmpty">Sem categorias.</div>
-        </div>
-      </section>
-
-      <section class="panel">
         <div class="panelHeader row">
           <div>
             <h2>Lançamentos do mês</h2>
@@ -285,191 +183,11 @@
       </section>
     </div>
 
-    <!-- CARDS PAGE -->
-    <div class="page hidden" data-page="cards">
-      <section class="panel">
-        <div class="panelHeader">
-          <h2>Cartões e Parcelamentos</h2>
-          <p class="muted">Ciclo automático por fechamento/vencimento. Previsto + Atrasado + Pagar.</p>
-        </div>
-
-        <form class="form" id="cardForm">
-          <label>Nome do cartão
-            <input id="cardName" placeholder="Ex: Nubank" required />
-          </label>
-          <label>Bandeira (opcional)
-            <input id="cardBrand" placeholder="Ex: Visa" />
-          </label>
-          <label>Fechamento (1–28)
-            <input id="cardClosing" type="number" min="1" max="28" value="25" />
-          </label>
-          <label>Vencimento (1–28)
-            <input id="cardDue" type="number" min="1" max="28" value="5" />
-          </label>
-          <div class="actions full">
-            <button class="btn primary" type="submit">Adicionar cartão</button>
-          </div>
-        </form>
-
-        <form class="form" id="chargeForm">
-          <label>Cartão
-            <select id="chargeCard" required></select>
-          </label>
-
-          <label>Data da compra
-            <input id="chargePurchaseDate" type="date" required />
-          </label>
-
-          <label class="full">Descrição
-            <input id="chargeTitle" placeholder="Ex: Uber / Mercado / iFood" required />
-          </label>
-
-          <label>Categoria
-            <input id="chargeCategory" placeholder="Ex: Fast Food" required />
-          </label>
-
-          <label>Valor (1x)
-            <input id="chargeAmount" inputmode="decimal" placeholder="Ex: 120,50" required />
-          </label>
-
-          <div class="actions full">
-            <button class="btn primary" type="submit">Adicionar compra (1x)</button>
-          </div>
-        </form>
-
-        <form class="form" id="planForm">
-          <label>Método
-            <select id="planMethod">
-              <option value="pix">PIX</option>
-              <option value="card">Cartão</option>
-            </select>
-          </label>
-
-          <label>Cartão (se for cartão)
-            <select id="planCard"></select>
-          </label>
-
-          <label>Data da compra
-            <input id="planPurchaseDate" type="date" required />
-          </label>
-
-          <label>1º vencimento (auto no cartão)
-            <input id="planFirstDue" type="date" required />
-          </label>
-
-          <label class="full">Título
-            <input id="planTitle" placeholder="Ex: Celular / Curso / Notebook" required />
-          </label>
-
-          <label>Categoria
-            <input id="planCategory" placeholder="Ex: Compras" required />
-          </label>
-
-          <label>Valor total
-            <input id="planTotal" inputmode="decimal" placeholder="Ex: 2500,00" required />
-          </label>
-
-          <label>Parcelas
-            <input id="planN" type="number" min="1" max="60" value="10" required />
-          </label>
-
-          <div class="actions full">
-            <button class="btn primary" type="submit">Criar parcelamento</button>
-          </div>
-        </form>
-
-        <div class="panelBody">
-          <h3 class="h3">Próximas parcelas (2 meses)</h3>
-          <div class="txList" id="instList"></div>
-          <div class="emptyState hidden" id="instEmpty">Sem parcelas.</div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="panelHeader row">
-          <div>
-            <h2>Fatura do cartão</h2>
-            <p class="muted">Por vencimento ou fechamento (datas exatas).</p>
-          </div>
-          <div class="filters">
-            <select id="stmtCard"></select>
-            <select id="stmtMode">
-              <option value="due" selected>Mês de vencimento</option>
-              <option value="closing">Mês de fechamento</option>
-            </select>
-            <input id="stmtMonth" type="month" />
-          </div>
-        </div>
-
-        <div class="panelBody">
-          <div class="grid2">
-            <div class="cardInner">
-              <h3 class="h3">Resumo</h3>
-              <div id="stmtSummary" class="muted"></div>
-            </div>
-
-            <div class="cardInner">
-              <h3 class="h3">Categorias (pizza)</h3>
-              <canvas id="stmtPie" height="140"></canvas>
-            </div>
-
-            <div class="cardInner full2">
-              <h3 class="h3">Itens</h3>
-              <div class="txList" id="stmtList"></div>
-              <div class="emptyState hidden" id="stmtEmpty">Sem itens nessa fatura.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- GOALS PAGE -->
-    <div class="page hidden" data-page="goals">
-      <section class="panel">
-        <div class="panelHeader">
-          <h2>Metas</h2>
-          <p class="muted">Aportes + manual (conforme modo).</p>
-        </div>
-
-        <form class="form" id="goalForm">
-          <label class="full">Nome
-            <input id="goalTitle" placeholder="Ex: Celular novo" required />
-          </label>
-
-          <label>Alvo
-            <input id="goalTarget" inputmode="decimal" placeholder="Ex: 2500,00" required />
-          </label>
-
-          <label>Modo
-            <select id="goalMode">
-              <option value="contributions">Aportes</option>
-              <option value="manual">Manual</option>
-              <option value="mixed">Misto</option>
-            </select>
-          </label>
-
-          <label>Prazo (opcional)
-            <input id="goalDeadline" type="date" />
-          </label>
-
-          <div class="actions full">
-            <button class="btn primary" type="submit">Criar meta</button>
-          </div>
-        </form>
-
-        <div class="panelBody">
-          <div class="txList" id="goalsList"></div>
-          <div class="emptyState hidden" id="goalsEmpty">Sem metas.</div>
-        </div>
-      </section>
-    </div>
-
-    <!-- NOTES PAGE -->
     <div class="page hidden" data-page="notes">
       <section class="panel">
         <div class="panelHeader">
           <h2>Notas</h2>
-          <p class="muted">Lembretes / tarefas com prioridade.</p>
+          <p class="muted">Lembretes / tarefas.</p>
         </div>
 
         <form class="form" id="noteForm">
@@ -504,12 +222,9 @@
         </div>
       </section>
     </div>
-
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>
